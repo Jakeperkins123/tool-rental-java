@@ -11,7 +11,7 @@ public class ToolInventory {
     }
 
     public Tool getTool(String toolCode){
-        if(!toolInventory.containsKey(toolCode)) throw new IllegalArgumentException("Invalid tool code: " + toolCode);
+        if(!toolInventory.containsKey(toolCode)) throw new IllegalArgumentException(Constants.ERROR_TOOL_NOT_FOUND);
         return toolInventory.get(toolCode);
     }
 }

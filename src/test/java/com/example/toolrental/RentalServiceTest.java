@@ -75,6 +75,8 @@ public class RentalServiceTest extends TestCase {
         assertEquals(1.49, agreement6.getFinalCharge());
     }
 
+
+    // My test cases
     public void testValidCheckout() {
         RentalAgreement agreement = rentalService.checkout(
                 "LADW",
@@ -90,6 +92,51 @@ public class RentalServiceTest extends TestCase {
         assertEquals(3.98, agreement.getPreDiscountCharge());
         assertEquals(0.40, agreement.getDiscountAmount());
         assertEquals(3.58, agreement.getFinalCharge());
+    }
+
+    public void testToolNotFound() {
+        try {
+            rentalService.checkout(
+                    "ASDFG",
+                    5,
+                    1,
+                    LocalDate.of(2015, Month.SEPTEMBER, 3),
+                    inventory
+            );
+            fail("Expected Illegal Argument Exception for invalid tool code");
+        } catch (IllegalArgumentException e) {
+            assertEquals(Constants.ERROR_TOOL_NOT_FOUND, e.getMessage());
+        }
+    }
+
+    public void testEmptyToolCode() {
+        try {
+            rentalService.checkout(
+                    "", // Empty string as tool code
+                    5,
+                    1,
+                    LocalDate.of(2015, Month.SEPTEMBER, 3),
+                    inventory
+            );
+            fail("Expected IllegalArgumentException for empty tool code");
+        } catch (IllegalArgumentException e) {
+            assertEquals(Constants.ERROR_TOOL_NOT_FOUND, e.getMessage());
+        }
+    }
+
+    public void testNullToolCode() {
+        try {
+            rentalService.checkout(
+                    null, // Null tool code
+                    5,
+                    1,
+                    LocalDate.of(2015, Month.SEPTEMBER, 3),
+                    inventory
+            );
+            fail("Expected IllegalArgumentException for null tool code");
+        } catch (IllegalArgumentException e) {
+            assertEquals(Constants.ERROR_TOOL_NOT_FOUND, e.getMessage());
+        }
     }
 
     public void testInvalidDiscount() {
