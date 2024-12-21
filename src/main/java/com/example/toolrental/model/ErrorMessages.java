@@ -1,6 +1,6 @@
 package com.example.toolrental.model;
 
-public final class Constants {
+public final class ErrorMessages {
     // Error messages
     public static final String ERROR_RENTAL_DAYS = "Rental days must be at least 1.";
     public static final String ERROR_DISCOUNT_PERCENT = "Discount % must be between 0 and 100.";

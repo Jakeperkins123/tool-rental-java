@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.temporal.TemporalAdjusters;
 
-import com.example.toolrental.model.Constants;
+import com.example.toolrental.model.ErrorMessages;
 import com.example.toolrental.model.RentalAgreement;
 import com.example.toolrental.model.Tool;
 import com.example.toolrental.model.ToolInventory;
@@ -16,16 +16,16 @@ public class RentalService {
 
     public RentalAgreement checkout(String toolCode, int rentalDays, int discountPercent, LocalDate checkoutDate, ToolInventory inventory) {
         if (rentalDays < 1) {
-            throw new IllegalArgumentException(Constants.ERROR_RENTAL_DAYS);
+            throw new IllegalArgumentException(ErrorMessages.ERROR_RENTAL_DAYS);
         }
 
         if (discountPercent < 0 || discountPercent > 100) {
-            throw new IllegalArgumentException(Constants.ERROR_DISCOUNT_PERCENT);
+            throw new IllegalArgumentException(ErrorMessages.ERROR_DISCOUNT_PERCENT);
         }
 
         Tool tool = inventory.getTool(toolCode);
         if(tool == null){
-            throw new IllegalArgumentException(Constants.ERROR_TOOL_NOT_FOUND);
+            throw new IllegalArgumentException(ErrorMessages.ERROR_TOOL_NOT_FOUND);
         }
 
         LocalDate dueDate = checkoutDate.plusDays(rentalDays);
@@ -64,7 +64,7 @@ public class RentalService {
 
     public boolean isHoliday(LocalDate date) {
         if (date == null) {
-            throw new IllegalArgumentException(Constants.ERROR_DATE_NOT_NULL);
+            throw new IllegalArgumentException(ErrorMessages.ERROR_DATE_NOT_NULL);
         }
         LocalDate independenceDay = LocalDate.of(date.getYear(), Month.JULY, 4);
         if (independenceDay.getDayOfWeek().equals(DayOfWeek.SATURDAY)) {

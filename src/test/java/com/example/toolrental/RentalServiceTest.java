@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.temporal.TemporalAdjusters;
 
-import com.example.toolrental.model.Constants;
+import com.example.toolrental.model.ErrorMessages;
 import com.example.toolrental.model.RentalAgreement;
 import com.example.toolrental.model.Tool;
 import com.example.toolrental.model.ToolInventory;
@@ -41,7 +41,7 @@ public class RentalServiceTest extends TestCase {
             );
             fail("Expected Illegal Argument Exception for discount %");
         } catch (IllegalArgumentException e) {
-            assertEquals(Constants.ERROR_DISCOUNT_PERCENT, e.getMessage());
+            assertEquals(ErrorMessages.ERROR_DISCOUNT_PERCENT, e.getMessage());
         }
 
         RentalAgreement agreement2 = rentalService.checkout("LADW", 3, 10, LocalDate.of(20, Month.JULY, 2), inventory);
@@ -105,7 +105,7 @@ public class RentalServiceTest extends TestCase {
             );
             fail("Expected Illegal Argument Exception for invalid tool code");
         } catch (IllegalArgumentException e) {
-            assertEquals(Constants.ERROR_TOOL_NOT_FOUND, e.getMessage());
+            assertEquals(ErrorMessages.ERROR_TOOL_NOT_FOUND, e.getMessage());
         }
     }
 
@@ -120,7 +120,7 @@ public class RentalServiceTest extends TestCase {
             );
             fail("Expected IllegalArgumentException for empty tool code");
         } catch (IllegalArgumentException e) {
-            assertEquals(Constants.ERROR_TOOL_NOT_FOUND, e.getMessage());
+            assertEquals(ErrorMessages.ERROR_TOOL_NOT_FOUND, e.getMessage());
         }
     }
 
@@ -135,7 +135,7 @@ public class RentalServiceTest extends TestCase {
             );
             fail("Expected IllegalArgumentException for null tool code");
         } catch (IllegalArgumentException e) {
-            assertEquals(Constants.ERROR_TOOL_NOT_FOUND, e.getMessage());
+            assertEquals(ErrorMessages.ERROR_TOOL_NOT_FOUND, e.getMessage());
         }
     }
 
@@ -149,7 +149,7 @@ public class RentalServiceTest extends TestCase {
                     inventory);
             fail("Expected invalid discount");
         } catch (IllegalArgumentException e) {
-            assertEquals(Constants.ERROR_DISCOUNT_PERCENT, e.getMessage());
+            assertEquals(ErrorMessages.ERROR_DISCOUNT_PERCENT, e.getMessage());
         }
         try {
             rentalService.checkout(
@@ -160,7 +160,7 @@ public class RentalServiceTest extends TestCase {
                     inventory);
             fail("Expected IllegalArgumentException for invalid discount");
         } catch (IllegalArgumentException e) {
-            assertEquals(Constants.ERROR_DISCOUNT_PERCENT, e.getMessage());
+            assertEquals(ErrorMessages.ERROR_DISCOUNT_PERCENT, e.getMessage());
         }
     }
 
@@ -181,7 +181,7 @@ public class RentalServiceTest extends TestCase {
             rentalService.isHoliday(null);
             fail("Expected IllegalArgumentException for null");
         } catch (IllegalArgumentException e) {
-            assertEquals(Constants.ERROR_DATE_NOT_NULL, e.getMessage());
+            assertEquals(ErrorMessages.ERROR_DATE_NOT_NULL, e.getMessage());
         }
         // Day before Independence Day (not a holiday)
         assertFalse(rentalService.isHoliday(LocalDate.of(2024, Month.JULY, 3)));
